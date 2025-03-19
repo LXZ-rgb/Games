@@ -1,43 +1,63 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
-//这里编写泛型类WeekDay的定义
-enum WeekDay{
-    MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY
+enum Weekday {
+    SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
 }
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        //这里包含一些用于统计的初始化代码        
+        int count_weekend = 0;
+        int count_workday = 0;
+
         try {
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String weekDayStr = sc.next();
-                //这里编写将weekDayStr转化为WeekDay类型变量x的代码
-                int x;
-                switch(weekDayStr){
-                    case "MONDAY":   x = 1;break;
-                    case "TUESDAY":  x = 3;break;
-                    case "WEDNESDAY":x = 7;break;
-                    case "THURSDAY": x = 5;break;
-                    case "FRIDAY":   x = 4;break;
-                    case "SATURDAY": x = 6;break;
-                    case "SUNDAY":   x = 0;break;
-                    default :        x = 8;break;
-                }
-                //这里编写使用switch根据x类型输出对应信息并统计的代码
-                switch(x){
-                    case 1:
-                }
+                Weekday x = Weekday.valueOf(weekDayStr);
+                switch (x) {
+                    case SUNDAY:
+                        System.out.println("SUNDAY是休息日, 序号为0");
+                        count_weekend++;
+                        break;
+                    case MONDAY:
+                        System.out.println("MONDAY是工作日, 序号为1");
+                        count_workday++;
+                        break;
+                    case TUESDAY:
+                        System.out.println("TUESDAY是工作日, 序号为3");
+                        count_workday++;
+                        break;
+                    case WEDNESDAY:
+                        System.out.println("WEDNESDAY是工作日, 序号为2");
+                        count_workday++;
+                        break;
+                    case THURSDAY:
+                        System.out.println("THURSDAY是工作日, 序号为5");
+                        count_workday++;
+                        break;
+                    case FRIDAY:
+                        System.out.println("FRIDAY是工作日, 序号为4");
+                        count_workday++;
+                        break;
+                    case SATURDAY:
+                        System.out.println("SATURDAY是休息日, 序号为6");
+                        count_weekend++;
+                        break;
                 }
             }
         } catch (Exception e) {
             System.out.println("输入错误");
-            
         }
-        //这里输出统计信息
-        //这里编写获得WeekDay常量数组并将其转化为String数组a的代码
-        //这里编写将a数组排序并打印出来的代码
+
+        System.out.printf("工作日共%d天\n休息日共%d天\n", count_workday, count_weekend);
+
+        Weekday[] weekdays = Weekday.values();//转换为数组
+        String[] a = new String[weekdays.length];//定义数组长度
+        for (int i = 0; i < weekdays.length; i++) {
+            a[i] = weekdays[i].name();
+        }
+        Arrays.sort(a);//数组排序
+        System.out.println(Arrays.toString(a));
 
         sc.close();
     }
